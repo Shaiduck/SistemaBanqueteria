@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3a1231e2-9c5c-4a3a-a4dd-d66978b019e5">
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     cotizar.`idcotizacion` AS cotizar_idcotizacion,
+     cotizar.`numpax` AS cotizar_numpax,
+     cotizar.`totalpax` AS cotizar_totalpax,
+     cotizar.`costototal` AS cotizar_costototal,
+     cotizar.`estado` AS cotizar_estado,
+     cotizar.`observaciones` AS cotizar_observaciones,
+     cotizar.`fechacotizar` AS cotizar_fechacotizar,
+     cotizar.`fkidagenda` AS cotizar_fkidagenda,
+     cotinsumo.`idcotizacion` AS cotinsumo_idcotizacion,
+     cotinsumo.`idinsumo` AS cotinsumo_idinsumo,
+     cotinsumo.`numeroinsumos` AS cotinsumo_numeroinsumos,
+     insumos.`idinsumo` AS insumos_idinsumo,
+     insumos.`nombreinsumo` AS insumos_nombreinsumo,
+     insumos.`descripcion` AS insumos_descripcion,
+     insumos.`forma` AS insumos_forma,
+     insumos.`tamaño` AS insumos_tamaño,
+     insumos.`color` AS insumos_color,
+     insumos.`diseño` AS insumos_diseño,
+     insumos.`cintilla` AS insumos_cintilla,
+     insumos.`precio` AS insumos_precio,
+     insumos.`tipocatalogo` AS insumos_tipocatalogo,
+     agenda.`idevento` AS agenda_idevento,
+     agenda.`fkidcliente` AS agenda_fkidcliente,
+     agenda.`hora_evento` AS agenda_hora_evento,
+     agenda.`tipoevento` AS agenda_tipoevento,
+     agenda.`ciudadevento` AS agenda_ciudadevento,
+     agenda.`fechaevento` AS agenda_fechaevento
+FROM
+     `cotizar` cotizar INNER JOIN `cotinsumo` cotinsumo ON cotizar.`idcotizacion` = cotinsumo.`idcotizacion`
+     INNER JOIN `insumos` insumos ON cotinsumo.`idinsumo` = insumos.`idinsumo`
+     INNER JOIN `agenda` agenda ON cotizar.`fkidagenda` = agenda.`idevento`]]>
+	</queryString>
+	<field name="agenda_tipoevento" class="java.lang.String"/>
+	<field name="agenda_fechaevento" class="java.sql.Date"/>
+	<field name="agenda_hora_evento" class="java.sql.Timestamp"/>
+	<field name="agenda_ciudadevento" class="java.lang.String"/>
+	<field name="cotizar_idcotizacion" class="java.lang.Integer"/>
+	<field name="cotizar_numpax" class="java.lang.Integer"/>
+	<field name="cotizar_totalpax" class="java.lang.Float"/>
+	<field name="cotizar_costototal" class="java.lang.Float"/>
+	<field name="cotizar_estado" class="java.lang.Integer"/>
+	<field name="cotizar_observaciones" class="java.lang.String"/>
+	<field name="cotizar_fechacotizar" class="java.sql.Timestamp"/>
+	<field name="cotinsumo_numeroinsumos" class="java.lang.Integer"/>
+	<field name="insumos_nombreinsumo" class="java.lang.String"/>
+	<field name="insumos_precio" class="java.lang.Float"/>
+	<field name="insumos_descripcion" class="java.lang.String"/>
+	<group name="agenda_tipoevento">
+		<groupExpression><![CDATA[$F{agenda_tipoevento}]]></groupExpression>
+		<groupHeader>
+			<band height="37">
+				<frame>
+					<reportElement uuid="d6382752-c38c-4ed7-91c9-ba5c5c2adf9a" mode="Opaque" x="-21" y="7" width="597" height="24" forecolor="#B89F7D" backcolor="#F2EBDF"/>
+					<rectangle>
+						<reportElement uuid="c4810a73-679b-4a15-ba81-f9d3086fcf43" mode="Opaque" x="21" y="0" width="36" height="24" backcolor="#736343"/>
+						<graphicElement>
+							<pen lineWidth="0.0"/>
+						</graphicElement>
+					</rectangle>
+					<textField>
+						<reportElement uuid="f0787303-59f1-4128-a5ab-763b301edb0f" style="SubTitle" x="68" y="0" width="413" height="24" forecolor="#736343"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{agenda_tipoevento}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="6"/>
+		</groupFooter>
+	</group>
+	<group name="cotizar_idcotizacion">
+		<groupExpression><![CDATA[$F{cotizar_idcotizacion}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<textField>
+					<reportElement uuid="bbb5349e-a3ef-4372-830d-7946823ee927" style="SubTitle" x="0" y="4" width="460" height="20"/>
+					<textElement>
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cotizar_idcotizacion}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="136" splitType="Stretch">
+			<image>
+				<reportElement uuid="156dae1c-3417-4f9f-9199-daebf74171b7" x="0" y="0" width="164" height="126"/>
+				<imageExpression><![CDATA["coffee.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="fb78ac93-b624-4e31-b33d-5e1367cf89e9" style="Title" x="170" y="0" width="263" height="62"/>
+				<textElement verticalAlignment="Middle">
+					<font pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Coffee Title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cfb58157-4f5d-4d71-ae25-72c44aa2b475" style="SubTitle" x="219" y="62" width="196" height="22"/>
+				<textElement>
+					<font fontName="Times New Roman" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Coffee SubTitle]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c7a961e2-83aa-48f1-ab59-f124b0a14c00" x="172" y="94" width="383" height="42"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor purus gravida arcu aliquam mattis. Donec et nulla libero, ut varius massa. Nulla sed turpis elit. Etiam aliquet mauris a ligula hendrerit in auctor leo lobortis.]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="5c959e49-998b-449c-a977-045cd7edba3a" x="433" y="-115" width="267" height="209"/>
+				<imageExpression><![CDATA["coffee_stain.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement uuid="4661def8-2401-4348-8d45-57e3ed06c0ed" positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="d8342a86-e642-417b-9965-7b29022f8980" style="Column header" x="0" y="0" width="42" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[agenda_fechaevento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4d41f365-44fc-42c9-b56d-ea3241e50f91" style="Column header" x="42" y="0" width="42" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[agenda_hora_evento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e4c62b78-3576-483d-9cd8-6b77ecfbf4d3" style="Column header" x="84" y="0" width="42" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[agenda_ciudadevento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ac54973b-137e-4b1a-9b8d-8273e2c73ceb" style="Column header" x="126" y="0" width="42" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[cotizar_numpax]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c11d0ece-7730-4a38-b95a-f52bf015747c" style="Column header" x="168" y="0" width="42" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[cotizar_totalpax]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="61228b23-592c-41b3-8a5e-8826b9e72d4e" style="Column header" x="210" y="0" width="42" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[cotizar_costototal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1897f0ef-f135-4969-a5cc-dde5130762e3" style="Column header" x="252" y="0" width="42" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[cotizar_estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="43cbad9d-c43e-4343-a00d-9cf0c65f0b0a" style="Column header" x="294" y="0" width="42" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[cotizar_observaciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2ca162df-6c65-44e4-9bb8-cc48dd0df9e9" style="Column header" x="336" y="0" width="42" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[cotizar_fechacotizar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="183bf693-673c-4815-985c-461908f1ffaa" style="Column header" x="378" y="0" width="42" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[cotinsumo_numeroinsumos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8acc1e5d-c53d-4629-afbb-14b6b970b699" style="Column header" x="420" y="0" width="42" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[insumos_nombreinsumo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b121adeb-a448-4e91-ba7e-0f81b3758fdb" style="Column header" x="462" y="0" width="42" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[insumos_precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="159bc171-c6c0-4c4d-a9cd-88c3c4d481d5" style="Column header" x="504" y="0" width="42" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[insumos_descripcion]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<frame>
+				<reportElement uuid="f6a9644d-1e6a-41ff-b1e5-925760309fc8" style="Row" mode="Opaque" x="0" y="0" width="555" height="15"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="063be751-e4b4-4281-a40a-c86b5cffe6ca" style="Detail" x="0" y="0" width="42" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{agenda_fechaevento}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="4be8be04-130d-4f7b-8325-609f47b111a6" style="Detail" x="42" y="0" width="42" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{agenda_hora_evento}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="daeaf7c7-1c3b-4627-8ad2-e2459e5e6a60" style="Detail" x="84" y="0" width="42" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{agenda_ciudadevento}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="4b9cb8a4-e735-4e6f-ade8-5b00d63bda79" style="Detail" x="126" y="0" width="42" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{cotizar_numpax}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="73e7f089-0269-4395-8228-b9dd64f8b004" style="Detail" x="168" y="0" width="42" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{cotizar_totalpax}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="a97cff34-2b21-4173-b1bc-23ebf5970d3f" style="Detail" x="210" y="0" width="42" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{cotizar_costototal}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="2fe397da-7326-4d45-bf96-61a6e3c0a137" style="Detail" x="252" y="0" width="42" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{cotizar_estado}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="4ed01f06-5a1a-4939-981c-a7846f3033b7" style="Detail" x="294" y="0" width="42" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{cotizar_observaciones}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="074b726a-8c84-432c-a9fc-462dfa86eec2" style="Detail" x="336" y="0" width="42" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{cotizar_fechacotizar}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="15618fb7-16e0-42db-bfb5-12bd5736dbba" style="Detail" x="378" y="0" width="42" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{cotinsumo_numeroinsumos}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="091dce89-b30c-4ae3-925b-2e1156e97df8" style="Detail" x="420" y="0" width="42" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{insumos_nombreinsumo}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="628b5714-3176-4fd1-b1f2-d1a2b455c7f7" style="Detail" x="462" y="0" width="42" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{insumos_precio}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="7dcdff35-c846-4a90-90f6-1d6947240e59" style="Detail" x="504" y="0" width="42" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{insumos_descripcion}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement uuid="fede4dca-e30a-4767-a89d-ccefffdaa210" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement uuid="70fed175-f5e7-4ad4-863a-c6f1aec23342" mode="Opaque" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#F2EBDF"/>
+				<textField evaluationTime="Report">
+					<reportElement uuid="2cab7278-2287-4fcb-b2fa-2ab27d5fd3e9" style="Column header" x="533" y="0" width="40" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="abed92c6-7e04-4ac7-98e2-22ddab8b2b04" style="Column header" x="453" y="0" width="80" height="20" forecolor="#736343"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement uuid="5ec08aff-95bd-4c55-92ee-770dbe0c8348" style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
