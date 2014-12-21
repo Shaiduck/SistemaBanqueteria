@@ -34,14 +34,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
         
-        /*WinConx wc = new WinConx();
+        WinConx wc = new WinConx();
         wc.setLocationRelativeTo(null);
         wc.setVisible(true);
         JDialog d1 = new JDialog(wc, "Configuración de conexión", true);
         
         d1.setLocationRelativeTo(null);
         d1.setVisible(false);
-        */
+        
     }
 
     /**
